@@ -37,7 +37,7 @@ Gneiss.defaultGneissChartConfig = {
 	primaryAxisPosition: "right", // the first axis will be rendered on this side, "right" or "left" only
 	allowAxisOverlap: false,
 	legend: true, // whether or not there should be a legend
-	title: "Chart Headline Goes Here", // the chart title 
+	title: "", // the chart title 
 	titleBottomMargin: 5, // the vertical space between the title and the next element (sometimes a legend, sometimes an axis)
 	bargridLabelBottomMargin: 5, //the space between the bargrid series label and the top most bar
 	colors: ["#ff4cf4","#ffb3ff","#e69ce6","#cc87cc","#b373b3","#995f99","#804c80","#665266","#158eff","#99cdff","#9cc2e6","#87abcc","#7394b3","#5f7d99","#466780","#525c66"], 
@@ -97,8 +97,8 @@ Gneiss.defaultGneissChartConfig = {
 			data: ["juicyness","color","flavor","travelability"]
 		}
 	],
-	sourceline: "Source: ",
-	creditline: "ProPublica"
+	sourceline: "",
+	creditline: "Made with Chartbuilder"
 };
 
 Gneiss.dateParsers = {
