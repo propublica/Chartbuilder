@@ -76,5 +76,7 @@ svg .seriesScatter circle {
 	
 #titleLine {
 	font-family: 'Whitney SSm A', 'Whitney SSm B', Arial, sans-serif;
-	fill: #666666;
+	font-size: 17px;
+	font-weight: bold;
+	fill: #000;
 }

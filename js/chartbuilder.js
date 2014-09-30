@@ -444,7 +444,7 @@ ChartBuilder = {
 		var bargridIndex = 0;
 		var scatterIndex = 0;
 		var seriesContainer = $("#seriesItems");
-		var isMultiAxis = false;
+		var isMultiAxis = true;
 		var colors = g.colors();
 		var i;
 		
@@ -805,7 +805,7 @@ ChartBuilder.getDefaultConfig = function() {
 						"#00BFA5","#70FFF7","#5DE1D9","#4BC4BC","#38A69E","#258880","#136B63","#004D45",
 						"#006DBF","#70B8FF","#5DA1E1","#4B89C4","#3871A6","#255A88","#13436B","#002B4D",
 						"#9300BF","#E770FF","#CB5DE1","#AE4BC4","#9238A6","#752588","#59136B","#3C004D"];
-  chartConfig.creditline = "Made with Chartbuilder";
+  chartConfig.creditline = "ProPublica";
   
   return chartConfig;
 };
