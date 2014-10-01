@@ -459,9 +459,12 @@ ChartBuilder = {
 					<option '+(s.type=="bargrid"?"selected":"")+' '+(g.xAxis().type == "date"?"disabled":"")+' value="bargrid">Bar Grid</option>\
 					<option '+(s.type=="scatter"?"selected":"")+' value="scatter">Scatter</option>\
 				</select>\
-				<input id="'+this.idSafe(s.name)+'_check" name="'+this.idSafe(s.name)+'_check" type="checkbox" />\
 				<div class="clearfix"></div>\
 			</div>');
+
+			// 				<input id="'+this.idSafe(s.name)+'_check" name="'+this.idSafe(s.name)+'_check" type="checkbox" />\
+
+
 			var color = s.color ? s.color.replace("#","") : colors[i].replace("#","");
 			s.color = "#" + color;
 			
@@ -469,6 +472,9 @@ ChartBuilder = {
 			picker = seriesItem.find("#"+this.idSafe(s.name)+"_color").colorPicker({pickerDefault: color, colors:this.allColors});
 			typer = seriesItem.find("#"+this.idSafe(s.name)+"_type");
 			axer = seriesItem.find("#"+this.idSafe(s.name)+"_check");
+
+			console.log(g.series()[i]);
+			console.log(axer);
 			
 			if(g.series()[i].axis == 1) {
 				axer.prop("checked",true);
@@ -806,6 +812,7 @@ ChartBuilder.getDefaultConfig = function() {
 						"#006DBF","#70B8FF","#5DA1E1","#4B89C4","#3871A6","#255A88","#13436B","#002B4D",
 						"#9300BF","#E770FF","#CB5DE1","#AE4BC4","#9238A6","#752588","#59136B","#3C004D"];
   chartConfig.creditline = "ProPublica";
+  chartConfig.primaryAxisPosition = "left";
   
   return chartConfig;
 };
@@ -956,13 +963,13 @@ ChartBuilder.start = function(config) {
 			chart.series(dataObj.data);
 
 			//if there is only one series (and isn't a bargrid), make the name of it the title and fill the title box
-			if(!chart.isBargrid()) {
-				if(chart.series().length === 1 && chart.title().length === 0 || chart.title() === chart.series()[0].name) {
-					chart.title(chart.series()[0].name);
-					chart.titleElement().text(chart.title());
-					$("#chart_title").val(chart.title());
-				}
-			}
+			// if(!chart.isBargrid()) {
+			// 	if(chart.series().length === 1 && chart.title().length === 0 || chart.title() === chart.series()[0].name) {
+			// 		chart.title(chart.series()[0].name);
+			// 		chart.titleElement().text(chart.title());
+			// 		$("#chart_title").val(chart.title());
+			// 	}
+			// }
 
 			chart.setPadding();
 			

@@ -37,7 +37,7 @@ Gneiss.defaultGneissChartConfig = {
 	primaryAxisPosition: "left", // the first axis will be rendered on this side, "right" or "left" only
 	allowAxisOverlap: false,
 	legend: true, // whether or not there should be a legend
-	title: "Chart Headline Goes Here", // the chart title 
+	title: "", // the chart title 
 	titleBottomMargin: 20, // the vertical space between the title and the next element (sometimes a legend, sometimes an axis)
 	bargridLabelBottomMargin: 5, //the space between the bargrid series label and the top most bar
 	colors: ["#ff4cf4","#ffb3ff","#e69ce6","#cc87cc","#b373b3","#995f99","#804c80","#665266","#158eff","#99cdff","#9cc2e6","#87abcc","#7394b3","#5f7d99","#466780","#525c66"], 
@@ -75,16 +75,8 @@ Gneiss.defaultGneissChartConfig = {
 	],
 	series: [
 		{
-			name: "apples",
+			name: "Apples",
 			data: [5.5,10.2,6.1,3.8],
-			source: "Some Org",
-			type: "line",
-			axis: 0,
-			color: null
-		},
-		{
-			name: "oranges",
-			data: [23,10,13,7],
 			source: "Some Org",
 			type: "line",
 			axis: 0,
@@ -94,10 +86,10 @@ Gneiss.defaultGneissChartConfig = {
 	xAxisRef: [
 		{
 			name: "names",
-			data: ["juicyness","color","flavor","travelability"]
+			data: ["Juicyness","Color","Flavor","Travelability"]
 		}
 	],
-	sourceline: "Source: ",
+	sourceline: "Source: Center for Medicare and Medicaid Services",
 	creditline: ""
 };
 
@@ -893,12 +885,14 @@ function Gneiss(config)
 
 			left = p.left + halfColumnWidth + ((g.yAxis().length == 1) ? 0 : d3.selectAll("#leftAxis.yAxis g:not(.topAxisItem) text")[0].pop().getBoundingClientRect().width + g.axisBarGap());
 			right = g.width() - p.right - d3.selectAll("#rightAxis.yAxis g:not(.topAxisItem) text")[0].pop().getBoundingClientRect().width - halfColumnWidth - g.axisBarGap();
+			// right = g.width() - p.right;
 			rangeArray = [left,right];
 		}
 		else if(!g.allowAxisOverlap()) {
 			try {
 				left = p.left + ((g.yAxis().length == 1) ? 0 : d3.selectAll("#leftAxis.yAxis g:not(.topAxisItem) text")[0].pop().getBoundingClientRect().width);
 				right = g.width() - p.right - d3.selectAll("#rightAxis.yAxis g:not(.topAxisItem) text")[0].pop().getBoundingClientRect().width - g.dotRadius();
+				// right = g.width() - p.right;
 				rangeArray = [left,right];
 			}
 			catch(e){
@@ -946,6 +940,8 @@ function Gneiss(config)
 		var g = this;
 		var curAxis;
 		var axisGroup;
+
+  	// console.log(g.yAxis());
 		
 		//CHANGE
 		if(g.yAxis().length == 1 ){
@@ -960,7 +956,7 @@ function Gneiss(config)
 				curAxis.axis = d3.svg.axis()
 					.scale(g.yAxis()[i].scale)
 					.orient(i == 0 ? "right" : "left" )
-					// .orient(i == 0 ? "left" : "right" )
+					// .orient("left")
 					.tickSize(g.width() - g.padding().left - g.padding().right)
 					//.ticks(g.yAxis()[0].ticks) // I'm not using built in ticks because it is too opinionated
 					.tickValues(g.yAxis()[i].tickValues?curAxis.tickValues:Gneiss.helper.exactTicks(curAxis.scale.domain(),g.yAxis()[0].ticks))
@@ -970,8 +966,9 @@ function Gneiss(config)
 				axisGroup = g.chartElement().append("g")
 					.attr("class","axis yAxis")
 					.attr("id",i == 0 ? "rightAxis" : "leftAxis" )
-					// .attr("id",i == 0 ? "leftAxis" : "rightAxis" )
 					.attr("transform",i == 0 ? "translate("+g.padding().left+",0)" : "translate("+( g.width()-g.padding().right)+",0)" )
+					// .attr("id","leftAxis")
+					// .attr("transform", "translate("+( g.width()-g.padding().right)+",0)" )
 					.call(curAxis.axis);
 			}
 			else {
@@ -979,7 +976,7 @@ function Gneiss(config)
 					.tickValues(curAxis.tickValues?curAxis.tickValues:Gneiss.helper.exactTicks(curAxis.scale.domain(),g.yAxis()[0].ticks));
 					
 				axisGroup = g.chartElement().selectAll(i == 0 ? "#rightAxis" : "#leftAxis")
-				// axisGroup = g.chartElement().selectAll(i == 0 ? "#leftAxis" : "#rightAxis")
+				// axisGroup = g.chartElement().selectAll("#leftAxis")
 					.call(curAxis.axis);
 				
 			}
@@ -1161,6 +1158,10 @@ function Gneiss(config)
 					.attr("fill",i==0 ? "#666666" : g.yAxis()[i].color)
 					.attr("x",function(){var elemx = Number(d3.select(this).attr("x")); return i == 0 ? elemx-3 : elemx+3; }) //CHANGE - MAGIC NUMBER (maybe?)
 					.attr("y",-9);
+					// .attr("text-anchor",i == 0 ? "start" : "end")
+					// .attr("fill", "#666666")
+					// .attr("x",function(){var elemx = Number(d3.select(this).attr("x")); return i == 0 ? elemx+3 : elemx-3; }) //CHANGE - MAGIC NUMBER (maybe?)
+					// .attr("y",-9);
 			});
 	};
   
@@ -1514,7 +1515,7 @@ function Gneiss(config)
 			//create a group to contain the legend items
 			g.legendItemContainer = g.chartElement().append("g")
 				.attr("id","legendItemContainer")
-				.attr("transform", "translate(0,10)");
+				.attr("transform", "translate(0,0)");
 				
 				//add columns to chart
 				columnGroups = columnSeries.data(sbt.column)
@@ -1534,13 +1535,14 @@ function Gneiss(config)
 							return g.xAxis().scale(g.xAxisRef()[0].data[i])  - columnWidth/2
 							})
 						.attr("y",function(d,i) {yAxisIndex = d3.select(this.parentNode).data()[0].axis; return (g.yAxis()[yAxisIndex].scale(d)-g.yAxis()[yAxisIndex].scale(Gneiss.helper.columnXandHeight(d,g.yAxis()[yAxisIndex].scale.domain()))) >= 0 ? g.yAxis()[yAxisIndex].scale(Gneiss.helper.columnXandHeight(d,g.yAxis()[yAxisIndex].scale.domain())) : g.yAxis()[yAxisIndex].scale(d)})
-								
-				
+
 				//add lines to chart
 				lineSeries.data(sbt.line)
 					.enter()
 					.append("path")
-						.attr("d",function(d,j) { yAxisIndex = d.axis; pathString = g.yAxis()[d.axis].line(d.data).split("L0,0").join("M").split("L0,0").join("");  return pathString.indexOf("NaN")==-1?pathString:"M0,0"})
+						// .attr("d",function(d,j) { yAxisIndex = d.axis; pathString = g.yAxis()[d.axis].line(d.data).split("L0,0").join("M").split("L0,0").join("");  return pathString.indexOf("NaN")==-1?pathString:"M0,0"})
+						.attr("d",function(d,j) { yAxisIndex = 0; pathString = g.yAxis()[0].line(d.data).split("L0,0").join("M").split("L0,0").join(""); return pathString.indexOf("NaN")==-1?pathString:"M0,0"})
+
 						.attr("class","seriesLine seriesGroup")
 						.attr("stroke",function(d,i){return d.color? d.color : colors[i]})
 				
@@ -1558,7 +1560,8 @@ function Gneiss(config)
 						.append("circle")
 						.attr("r",g.dotRadius())
 						.attr("transform",function(d,i){
-							yAxisIndex = d3.select(this.parentNode).data()[0].axis; 
+							yAxisIndex = d3.select(this.parentNode).data()[0].axis;
+							console.log(yAxisIndex);
 							return "translate("+(g.xAxis().type=="date" ?
 								g.xAxis().scale(g.xAxisRef()[0].data[i]):
 								g.xAxis().scale(i)) + "," + g.yAxis()[yAxisIndex].scale(d) + ")"
