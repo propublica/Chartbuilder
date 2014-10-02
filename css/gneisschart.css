@@ -29,6 +29,7 @@ svg .axis g.zero line {
 
 svg #xAxis line {
 	stroke: #e6e6e6;
+	display: none;
 }
 
 svg #xAxis{
@@ -42,6 +43,7 @@ svg .axis path {
 
 svg .axis text {
 	font-family: 'Whitney SSm A', 'Whitney SSm B', Arial, sans-serif;
+	font-size: 12px;
 }
 
 svg .legendItem text {
@@ -58,6 +60,7 @@ svg text.metaText {
 svg text.barLabel, 
 svg text.bargridLabel {
 	font-family: 'Whitney SSm A', 'Whitney SSm B', Arial, sans-serif;
+	font-size: 12px;
 }
 
 /*Default styling of series*/

@@ -68,20 +68,26 @@
             <div class="optionBlock topOptionBlock">
               <h2>2. Series Options</h2>
               <div id="seriesItems"></div>
+              <div>
+                <label for="chartWidth">Chart Width</label><input type="text" name="chartWidth" value="600" id="chartWidth">
+              </div>
+              <div>
+                <label for="fontSize">Font Size (px)</label><input type="text" name="fontSize" value="12" id="fontSize">
+              </div>
             </div>
   					
   					<div class="optionBlock">
     					<h2>3. Chart Options</h2>
     						<div class="optionGroup"><label for="chart_title">Title</label><input type="text" name="chart_title" value="" id="chart_title"></div>
-    						<div class="optionGroup"><label for="credit">Credit</label><input id="creditLine" type="text" name="credit" value="ProPublica"></div>
-    						<div class="optionGroup"><label for="source">Source</label><input id="sourceLine" type="text" name="source" value="Source: ">
+                <!-- <div class="optionGroup"><label for="source">Source</label><input id="sourceLine" type="text" name="source" value="Source: "> -->
+    						<div class="optionGroup"><label for="credit">Source</label><input id="creditLine" type="text" name="credit" value="Source: Center for Medicare and Medicaid Services"></div>
     						<cite>Something like "Source: Bureau of Labor Statistics"</cite></div>
     				</div>
     				<div class="optionBlock">
    							<h2>4. Axis Options</h2>
     						<div id="rightAxisControls">
-    							<div class="optionGroup"><label for="right_axis_prefix">Axis Prefix</label><input type="text" name="right_axis_prefix" value="" id="right_axis_prefix"></div>
-	    						<div class="optionGroup"><label for="right_axis_suffix">Axis Suffix</label><input type="text" name="right_axis_suffix" value="" id="right_axis_suffix"></div>
+    							<div class="optionGroup"><label for="right_axis_prefix">Axis Prefix</label><input type="text" name="right_axis_prefix" value="$" id="right_axis_prefix"></div>
+	    						<div class="optionGroup"><label for="right_axis_suffix">Axis Suffix</label><input type="text" name="right_axis_suffix" value="m" id="right_axis_suffix"></div>
 	    						<div class="optionGroup"><label for="right_axis_tick_num">Number of Y Axis Ticks</label><select name="right_axis_tick_num" id="right_axis_tick_num" size="1">
 	    							<option>3</option>
 	    							<option selected >4</option>
@@ -194,6 +200,44 @@
 		    active: function(name) {
 		        $(document).ready(function() {
 		            ChartBuilder.start();
+
+                $('#chartWidth').bind("enterKey",function(e){
+                   $('#chartContainer').width($('#chartWidth').val());
+                   chart.resize()
+                      .setPadding();
+                    ChartBuilder.setChartArea();
+                    chart.setYScales()
+                      .redraw();
+                });
+
+                $('#chartWidth').keyup(function(e){
+                    if(e.keyCode == 13)
+                    {
+                        $(this).trigger("enterKey");
+                    }
+                });
+
+                $('#fontSize').bind("enterKey",function(e){
+                   var size = $('#fontSize').val();
+                   $('svg .axis text').css("font-size", size);
+                   $('svg text.barLabel, svg text.bargridLabel').css("font-size", size);
+
+
+                   chart.resize()
+                      .setPadding();
+                    ChartBuilder.setChartArea();
+                    chart.setYScales()
+                      .redraw();
+                });
+
+                $('#fontSize').keyup(function(e){
+                    if(e.keyCode == 13)
+                    {
+                        $(this).trigger("enterKey");
+                    }
+                });
+
+                
 		        });
 		    }
 		});

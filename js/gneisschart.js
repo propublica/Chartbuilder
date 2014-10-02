@@ -44,13 +44,13 @@ Gneiss.defaultGneissChartConfig = {
 	padding :{
 		top: 5,
 		bottom: 50,
-		left: 10,
+		left: 15,
 		right: 10
 	},
 	xAxis: {
 		domain: [0,100],
-		prefix: "",
-		suffix: "",
+		prefix: "$",
+		suffix: "m",
 		type: "linear",
 		formatter: null,
 		mixed: true,
@@ -73,24 +73,26 @@ Gneiss.defaultGneissChartConfig = {
 			color: null
 		}
 	],
+
 	series: [
 		{
-			name: "Apples",
-			data: [5.5,10.2,6.1,3.8],
+			name: "Total (Millions)",
+			data: [302.5,202.6,158.2,92.8,74.1,38.1,26.7,25.5,19.2],
 			source: "Some Org",
 			type: "line",
 			axis: 0,
 			color: null
 		}
 	],
+
 	xAxisRef: [
 		{
-			name: "names",
-			data: ["Juicyness","Color","Flavor","Travelability"]
+			name: "Type of Payment",
+			data: ["Royalty or License","Promotional Speaking","Consulting Fee","Food and Beverage","Travel and Lodging","Grant","Education","Honoraria","Gift"]
 		}
 	],
-	sourceline: "Source: Center for Medicare and Medicaid Services",
-	creditline: ""
+	sourceline: "",
+	creditline: "Source: Center for Medicare and Medicaid Services"
 };
 
 Gneiss.dateParsers = {

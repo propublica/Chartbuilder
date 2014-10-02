@@ -329,8 +329,8 @@ ChartBuilder = {
 		var svgContent = this.createSVGContent(document.getElementById("chart"));
 
 		svgContent.source[0] = svgContent.source[0]
-			.split('width="100%"').join('width="'+canvas.width+'"')
-			.split('height="100%"').join('height="'+canvas.height+'"');
+			.split('width="100%"').join('width="'+$('#chartContainer').width()+'"')
+			.split('height="100%"').join('height="'+$('#chartContainer').height()+'"');
 
 		svgContent.source[0] = ChartBuilder.cleanSVGString(svgContent.source[0])
 
@@ -456,7 +456,7 @@ ChartBuilder = {
 				<select class="typePicker" id="'+this.idSafe(s.name)+'_type">\
 					<option '+(s.type=="line"?"selected":"")+' value="line">Line</option>\
 					<option '+(s.type=="column"?"selected":"")+' value="column">Column</option>\
-					<option '+(s.type=="bargrid"?"selected":"")+' '+(g.xAxis().type == "date"?"disabled":"")+' value="bargrid">Bar Grid</option>\
+					<option '+(s.type=="bargrid"?"selected":"")+' '+(g.xAxis().type == "date"?"disabled":"")+' value="bargrid">Bar Grid 👍</option>\
 					<option '+(s.type=="scatter"?"selected":"")+' value="scatter">Scatter</option>\
 				</select>\
 				<div class="clearfix"></div>\
@@ -525,11 +525,11 @@ ChartBuilder = {
 						domain: [null, null],
 						tickValues: null,
 						prefix: {
-							value: "",
+							value: "$",
 							use: "top" //can be "top", "all", "positive", or "negative"
 						},
 						suffix: {
-							value: "",
+							value: "m",
 							use: "top"
 						},
 						ticks: 4,
@@ -805,13 +805,13 @@ ChartBuilder = {
 // Create default config for chartbuilder
 ChartBuilder.getDefaultConfig = function() {
   var chartConfig = {};
-  chartConfig.colors = ["#BF0053","#FF70B0","#E15D98","#C44B81","#A63869","#882551","#6B133A","#4D0022",
+  chartConfig.colors = ["#4883b9","#BF0053","#FF70B0","#E15D98","#C44B81","#A63869","#882551","#6B133A","#4D0022",
 						"#BF600A","#FFC07E","#E1A76A","#C48D55","#A67341","#885A2D","#6B4118","#4D2704",
 						"#BFAA00","#FFF270","#E1D55D","#C4B84B","#A69C38","#887F25","#6B6213","#4D4500",
 						"#00BFA5","#70FFF7","#5DE1D9","#4BC4BC","#38A69E","#258880","#136B63","#004D45",
 						"#006DBF","#70B8FF","#5DA1E1","#4B89C4","#3871A6","#255A88","#13436B","#002B4D",
 						"#9300BF","#E770FF","#CB5DE1","#AE4BC4","#9238A6","#752588","#59136B","#3C004D"];
-  chartConfig.creditline = "ProPublica";
+  chartConfig.creditline = "Source: Center for Medicare and Medicaid Services";
   chartConfig.primaryAxisPosition = "left";
   
   return chartConfig;
