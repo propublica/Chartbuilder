@@ -77,7 +77,7 @@ Gneiss.defaultGneissChartConfig = {
 	series: [
 		{
 			name: "Total (Millions)",
-			data: [302.5,202.6,158.2,92.8,74.1,38.1,26.7,25.5,19.2],
+			data: [302.5,158.2,38.1,26.7,25.5,19.2],
 			source: "Some Org",
 			type: "line",
 			axis: 0,
@@ -88,7 +88,7 @@ Gneiss.defaultGneissChartConfig = {
 	xAxisRef: [
 		{
 			name: "Type of Payment",
-			data: ["Royalty or License","Promotional Speaking","Consulting Fee","Food and Beverage","Travel and Lodging","Grant","Education","Honoraria","Gift"]
+			data: ["Royalties","Consulting","Grant","Education","Honoraria","Gift"]
 		}
 	],
 	sourceline: "",

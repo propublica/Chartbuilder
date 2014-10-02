@@ -462,8 +462,7 @@ ChartBuilder = {
 				<div class="clearfix"></div>\
 			</div>');
 
-			// 				<input id="'+this.idSafe(s.name)+'_check" name="'+this.idSafe(s.name)+'_check" type="checkbox" />\
-
+		//				<input id="'+this.idSafe(s.name)+'_check" name="'+this.idSafe(s.name)+'_check" type="checkbox" />\
 
 			var color = s.color ? s.color.replace("#","") : colors[i].replace("#","");
 			s.color = "#" + color;

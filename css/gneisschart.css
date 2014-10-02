@@ -29,7 +29,7 @@ svg .axis g.zero line {
 
 svg #xAxis line {
 	stroke: #e6e6e6;
-	display: none;
+	/*display: none;*/
 }
 
 svg #xAxis{
